@@ -1,0 +1,478 @@
+/* 1. ПЕРЕМЕННЫЕ И ОСНОВА */
+:root {
+  --bg-color: #f3f4f6;
+  --card-bg: #ffffff;
+  --primary: #4f46e5;
+  --primary-dark: #4338ca;
+  --text-dark: #1f2937;
+  --text-light: #6b7280;
+  --border: #e5e7eb;
+  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  --radius: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--bg-color);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  color: var(--text-dark);
+}
+
+ul {
+  list-style: none; 
+  padding: 0; 
+  margin: 0; 
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* 2. ОБЩИЕ КОМПОНЕНТЫ */
+.card-base,
+.profile-card,
+.auth-card,
+.post-card,
+.create-post,
+.modal {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.card-base,
+.profile-card,
+.post-card,
+.create-post,
+.modal-box {
+  padding: 24px;
+}
+
+.auth-card {
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: inherit;
+  outline: none;
+  transition: 0.2s;
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* Кнопки */
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+.btn-inline {
+  width: auto;
+  padding: 10px 30px;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+/* 3. СЕТКА ДАШБОРДА */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 1100px;
+  width: 95%;
+  margin: 40px auto;
+  align-items: stretch;
+}
+
+.profile-card {
+  grid-column: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+.create-post {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+}
+.posts-feed-full {
+  grid-column: 1 / span 2;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.profile-actions {
+  padding: 0;
+  margin: 0;
+}
+/* 4. ПРОФИЛЬ И СОЗДАНИЕ ПОСТА */
+.profile-avatar {
+  width: 100px;
+  height: 100px;
+  background: var(--bg-color);
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  border: 4px solid var(--border);
+}
+
+.profile-stats {
+  text-align: left;
+  margin: 20px 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.profile-stats p {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+}
+
+.create-post .form {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.create-post textarea {
+  flex-grow: 1;
+  margin-bottom: 16px;
+  height: 110px;
+}
+.create-post-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* 5. ПОСТЫ И ФИЛЬТРЫ */
+.feed-filters {
+  display: flex;
+  gap: 10px;
+}
+
+.filter-btn {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  color: var(--text-light);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  border-color: var(--primary);
+}
+.filter-btn.active {
+  background: var(--primary);
+  color: white;
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.post-date {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.post-footer {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-stats {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.comment-display {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+/* 6. АВТОРИЗАЦИЯ И МОДАЛКИ */
+.auth-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.auth-footer{
+  display: flex;
+  gap: 5px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+.form-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.modal {
+  border: none;
+  width: 90%;
+  max-width: 400px;
+  padding: 0;
+}
+.modal::backdrop {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+}
+.modal-box {
+  position: relative;
+  padding: 40px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: var(--text-light);
+  cursor: pointer;
+}
+
+.success-message {
+  background-color: var(--primary);
+  color: var(--card-bg);
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  animation: fadeOut 3s forwards; /* Исчезнет через 3 секунды */
+  animation-delay: 2s; /* Начнет исчезать после 2-й секунды */
+}
+.form-error {
+  color: rgb(93, 3, 3);
+  font-size: 14px;
+}
+
+/* 7. АНИМАЦИИ И АДАПТИВ */
+.modal[open] {
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 850px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  .profile-card,
+  .create-post,
+  .posts-feed-full {
+    grid-column: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+
+/* свое */
+.form-error {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 4px;
+  margin-bottom: 0;
+  display: block;
+}
+
+/* .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+  padding: 0;
+  line-height: 1;
+}
+
+.modal-close:hover {
+  color: #333;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.btn-secondary {
+  background: #f0f0f0;
+  color: #333;
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #e0e0e0;
+}
+
+.btn-secondary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 16px;
+  transition: opacity 0.3s;
+}
+
+.profile-avatar:hover {
+  opacity: 0.8;
+}
+
+.avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  background: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  color: #666;
+} */
+
+
+/* комментарий */
+/* .comments-section {
+  border-top: 1px solid #eee;
+  padding-top: 12px;
+  margin-top: 12px;
+}
+
+.comment {
+  background: #f9f9f9;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.comment-text {
+  margin: 0 0 4px 0;
+  font-size: 14px;
+}
+
+.comment-author {
+  margin: 0;
+  font-size: 12px;
+  color: #666;
+} */
