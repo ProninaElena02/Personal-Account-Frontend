@@ -19,34 +19,6 @@ const getErrorMessage = (err: unknown): string => {
 };
 
 
-// export const registerUser = createAsyncThunk<RegisterResponse, Record<string, string>, { 
-// rejectValue: string }>(
-//   'auth/register',
-//   async (formData, { rejectWithValue }) => {
-//     try {
-//       const data = await api.register(formData);
-//       saveAuthData(data.jwt, data.user);
-//       return data;
-//     } catch (err) {
-//       return rejectWithValue(getErrorMessage(err));
-//     }
-//   }
-// );
-
-//Может не спрашивает доп поля
-// export const loginUser = createAsyncThunk<RegisterResponse, Record<string, string>, { 
-// rejectValue: string }>(
-//   'auth/login',
-//   async (formData, { rejectWithValue }) => {
-//     try {
-//       const data = await api.login(formData);
-//       saveAuthData(data.jwt, data.user);
-//       return data;
-//     } catch (err) {
-//       return rejectWithValue(getErrorMessage(err));
-//     }
-//   }
-// );
 
 export const registerUser = createAsyncThunk<RegisterResponse, Record<string, string>, { 
 rejectValue: string }>(
@@ -167,24 +139,7 @@ export const { logout, clearError } = authSlice.actions;
 export default authSlice.reducer;
 
 
-// export const updateUserProfile = createAsyncThunk<User, { userId: number; updateData: { username?: string; email?: string; phone?: string; gender?: string } }, { rejectValue: string }>(
-//   'auth/updateProfile',
-//   async ({ userId, updateData }, { rejectWithValue }) => {
-//     try {
-//       const data = await api.updateUser(userId, updateData);
-//       // данные в localStorage
-//       const savedUser = localStorage.getItem('user');
-//       if (savedUser) {
-//         const userData = JSON.parse(savedUser);
-//         const updatedUser = { ...userData, ...data };
-//         localStorage.setItem('user', JSON.stringify(updatedUser));
-//       }
-//       return data;
-//     } catch (err) {
-//       return rejectWithValue(getErrorMessage(err));
-//     }
-//   }
-// );
+
 
 export const updateUserProfile = createAsyncThunk<User, { userId: number; updateData: { username?: string; email?: string; phone?: string; gender?: string } }, { rejectValue: string }>(
   'auth/updateProfile',

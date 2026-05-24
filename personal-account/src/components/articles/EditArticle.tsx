@@ -1,14 +1,8 @@
 import React, { memo, useState, useCallback, useMemo } from 'react';
-import type { Article } from '../../utils/interfaces';
+import type { Article, EditArticleProps } from '../../utils/interfaces';
 import { validateArticleForm, type FormErrors } from '../../utils/validators';
 
-interface EditArticleProps {
-  article: Article;
-  //пропс и он его вызывает
-  onSave: (documentId: string, data: { title?: string; content?: string }) => void;
-  onClose: () => void;
-  isLoading?: boolean;
-}
+
 //редактироввние
 const EditArticle: React.FC<EditArticleProps> = memo(({ article, onSave, onClose, isLoading = false }) => {
   const [formData, setFormData] = useState({

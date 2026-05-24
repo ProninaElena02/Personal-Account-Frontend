@@ -227,15 +227,15 @@ async updateUser(userId: number, updateData: UpdateUserPayload): Promise<User> {
 
   // поиск статей, прокомментированных автором
   async getCommentedArticles(authorDocumentId: string): Promise<ArticlesResponse> {
-    const { data } = await $api.get<ArticlesResponse>(
+    const { data } = await $api.get<NotesResponse>(
       `/notes?filters[author][documentId][$eq]=${authorDocumentId}&populate[article][populate]=*`
     );
-    // находим уникальные статьи из комментариев
+    
     const articles = data.data
-      .filter((note: any) => note.article)
-      .map((note: any) => note.article)
-      .filter((article: any, index: number, self: any[]) => 
-        index === self.findIndex((a: any) => a.documentId === article.documentId)
+      .filter((note): note is Note & { article: Article } => !!note.article)
+      .map(note => note.article)
+      .filter((article, index, self) => 
+        index === self.findIndex(a => a.documentId === article.documentId)
       );
     
     return {
