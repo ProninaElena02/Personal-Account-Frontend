@@ -3,7 +3,6 @@ import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/tool
 import { api } from '../utils/api';
 import type {  Article,  ArticlesState, Note, CreateNoteFulfilledAction,  DeleteNoteFulfilledAction } from '../utils/interfaces';
 import type { RootState } from './index';
-// import { addNewNote, removeNote } from './notesSlice';
 
 // getArticles
 export const fetchArticles = createAsyncThunk<Article[]>(
@@ -110,22 +109,7 @@ const articlesSlice = createSlice({
         state.items = state.items.filter(article => article.documentId !== action.payload);
       })
 
-      //комментарий
-      // .addCase(addNewNote.fulfilled, (state, action) => {
-      //   const articleDocumentId = action.payload._articleDocumentId;
-      //   if (!articleDocumentId) return;
-        
-      //   const articleIndex = state.items.findIndex(a => a.documentId === articleDocumentId);
-      //   if (articleIndex !== -1) {
-      //     const article = state.items[articleIndex];//мы положим комент в массив или создадим этот массив
-      //     const updatedNotes = article.notes ? [...article.notes, action.payload] : [action.payload];
-      //     state.items[articleIndex] = {
-      //       ...article,
-      //       notes: updatedNotes
-      //     };
-      //   }
-      // })
-      
+    
 
       //edit
       .addCase(editArticle.pending, (state) => {//загрузка
@@ -158,18 +142,9 @@ const articlesSlice = createSlice({
         state.error = action.payload || 'Ошибка редактирования статьи';
       })
 
-      //удаление комента
-      // .addCase(removeNote.fulfilled, (state, action: PayloadAction<string>) => {
-      //   state.items = state.items.map(article => {
-      //     if (article.notes) {
-      //       return {
-      //         ...article,
-      //         notes: article.notes.filter(note => note.documentId !== action.payload)
-      //       };
-      //     }
-      //     return article;
-      //   });
-      // });
+      //комментарий
+
+      
       .addCase('notes/create/fulfilled', (state, action: CreateNoteFulfilledAction) => {
         const articleDocumentId = action.payload._articleDocumentId;
         if (!articleDocumentId) return;
