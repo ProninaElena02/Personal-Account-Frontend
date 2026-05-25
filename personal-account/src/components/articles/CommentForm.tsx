@@ -18,16 +18,7 @@ const CommentForm: React.FC<CommentFormProps> = memo(({ articleDocumentId, onClo
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Валидация текста и обновление ошибок
-  // const validateAndSetErrors = useCallback((value: string) => {
-  //   const validationErrors = validateNoteForm({ text: value });
-  //   setErrors(validationErrors);
-  //   return Object.keys(validationErrors).length === 0;
-  // }, []);
 
-  // const handleChange = useCallback((value: string) => {
-  //   setText(value);
-  //   validateAndSetErrors(value);
-  // }, [validateAndSetErrors]);
 
 
   //то же самое что выше но объединены
