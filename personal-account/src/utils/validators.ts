@@ -49,21 +49,7 @@ export const validateEmail = (email: string): string => {
 
 
 //имя пользователя
-// export const validateUsername = (username: string): string => {
-//   if (!username || username.trim().length === 0) {
-//     return 'Имя пользователя обязательно';
-//   }
-//   if (username.trim().length < 2) {
-//     return 'Минимальная длина имени: 2 символа';
-//   }
-//   if (!/^[A-Za-zА-Яа-яЁё\s-]+$/.test(username.trim())) {
-//     return 'Разрешены только буквы, пробелы и дефисы';
-//   }
-//   if (username !== username.trimStart()) {
-//     return 'Имя не должно начинаться с пробелов';
-//   }
-//   return '';
-// };
+
 export const validateUsername = (username: string): string => {
   return validateRequired(username, 'Имя пользователя') //Имя пользователя не может быть пустым
       || validateMinLength(username, 2, 'Имя пользователя') 
@@ -91,21 +77,7 @@ export const validatePassword = (password: string): string => {
 };
 
 //заголовок
-// export const validateTitle = (title: string): string => {
-//   if (!title || title.trim().length === 0) {
-//     return 'Заголовок обязателен';
-//   }
-//   if (title.trim().length < 3) {
-//     return 'Минимальная длина заголовка: 3 символа';
-//   }
-//   if (title !== title.trimStart()) {
-//     return 'Заголовок не должен начинаться с пробелов';
-//   }
-//   if (/\s{2,}/.test(title)) {
-//     return 'Заголовок не должен содержать двойных пробелов';
-//   }
-//   return '';
-// };
+
 export const validateTitle = (title: string): string => {
   return validateRequired(title, 'Заголовок') 
       || validateMinLength(title, 3, 'Заголовок') 
@@ -128,18 +100,7 @@ export const validateContent = (content: string): string => {
 };
 
 //коментарий
-// export const validateCommentText = (text: string): string => {
-//   if (!text || text.trim().length === 0) {
-//     return 'Комментарий не может быть пустым';
-//   }
-//   if (text.trim().length < 2) {
-//     return 'Минимальная длина комментария: 2 символа';
-//   }
-//   if (text !== text.trimStart()) {
-//     return 'Комментарий не должен начинаться с пробелов';
-//   }
-//   return '';
-// };
+
 export const validateCommentText = (text: string): string => {
   return validateRequired(text, 'Комментарий') 
       || validateMinLength(text, 2, 'Комментарий') 
