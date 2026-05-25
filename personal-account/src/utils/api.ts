@@ -58,23 +58,7 @@ export const api = {
 },
 
   //создает статью и преобразует плоский 
- //текст из формы в структуру JSON Blocks, которую требует Strapi для полей
-  // async createArticle(articleData: { title: string; content: string; author: string }): Promise<{ data: Article }> {
-  //   const { data } = await $api.post<{ data: Article }>('/articles', {
-  //     data: {
-  //       title: articleData.title,
-  //       content: [
-  //         {
-  //           type: 'paragraph',
-  //           children: [{ type: 'text', text: articleData.content }]
-  //         }
-  //       ],
-  //       author: articleData.author
-  //     }
-  //   });
-  //   return data;
-
-  // },
+ 
   async createArticle(articleData: { title: string; content: string; author: string }): Promise<{ data: Article }> {
     const { data } = await $api.post<{ data: Article }>('/articles?populate=*', {
       data: {
@@ -100,13 +84,7 @@ async deleteArticle(documentId: string): Promise<boolean> {
     );
     
     // и все удалии
-    // if (notes.data.data && notes.data.data.length > 0) {
-    //   await Promise.all(
-    //     notes.data.data.map((note: Note) => 
-    //       $api.delete(`/notes/${note.documentId}`)
-    //     )
-    //   );
-    // }
+
     if (notes.data && notes.data.data.length > 0) {//нужно сначала во внутрь обертки, потом во внутрь даты
       await Promise.all(
         notes.data.data.map((note: Note) => 
@@ -120,23 +98,14 @@ async deleteArticle(documentId: string): Promise<boolean> {
 },
 
   //редактирование пользователя
-  // async updateUser(userId: number, updateData: { username?: string; email?: string; phone?: string }): Promise<User> {
-  //   const { data } = await $api.put<User>(`/users/${userId}`, updateData);
-  //   return data;
-  // },
+
 async updateUser(userId: number, updateData: UpdateUserPayload): Promise<User> {
     const { data } = await $api.put<User>(`/users/${userId}?populate=*`, updateData);
     return data;
 },
 
 
-// async uploadFile(file: File): Promise<UserFile[]> {
-//     const formData = new FormData();
-//     formData.append('files', file);
-    
-//     const { data } = await $uploadApi.post<UserFile[]>('/upload', formData);
-//     return data;
-// },
+
   async uploadFile(file: File): Promise<UserFile[]> {
       const formData = new FormData();
       formData.append('files', file);
@@ -145,17 +114,7 @@ async updateUser(userId: number, updateData: UpdateUserPayload): Promise<User> {
       return data;
   },
 
-  // создание комментарий к статье
-  // async createNote(noteData: { text: string; article: string; author: string }): Promise<{ data: Note }> {
-  //   const { data } = await $api.post<{ data: Note }>('/notes', {
-  //     data: {
-  //       text: noteData.text,
-  //       article: noteData.article,
-  //       author: noteData.author
-  //     }
-  //   });
-  //   return data;
-  // },
+
   async createNote(noteData: { text: string; article: string; author: string }): Promise<{ data: Note }> {
     const { data } = await $api.post<{ data: Note }>('/notes?populate=*', {
       data: {
@@ -183,23 +142,7 @@ async updateUser(userId: number, updateData: UpdateUserPayload): Promise<User> {
     return true;
   },
 
-  // редактирование статьи
-  // async updateArticle(documentId: string, articleData: { title?: string; content?: string }): Promise<{ data: Article }> {
-  //   const { data } = await $api.put<{ data: Article }>(`/articles/${documentId}`, {
-  //     data: {
-  //       ...(articleData.title && { title: articleData.title }),
-  //       ...(articleData.content && {
-  //         content: [
-  //           {
-  //             type: 'paragraph',
-  //             children: [{ type: 'text', text: articleData.content }]
-  //           }
-  //         ]
-  //       })
-  //     }
-  //   });
-  //   return data;
-  // },
+
  async updateArticle(documentId: string, articleData: { title?: string; content?: string }): Promise<{ data: Article }> {
     const { data } = await $api.put<{ data: Article }>(`/articles/${documentId}?populate=*`, {
       data: {
