@@ -127,12 +127,6 @@ export interface CreateArticleProps {//публикация
 
 }
 
-// export interface ArticleCardProps {//карточка
-//   article: Article;
-//   onDelete: (documentId: string) => void;
-//   onDeleteNote: (documentId: string) => void;
-//   currentUserDocumentId?: string | null;  //Strapi работает с documentId , а не с id (число), а проверки авторства в коде сравнивают currentUserDocumentId === article.author?.documentId
-// }
 
 export interface ArticleListProps {//лента статей
   articles: Article[];
